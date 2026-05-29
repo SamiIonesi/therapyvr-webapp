@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="ro">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+<title>TherapyVR — Interfață Terapeut</title>
+<link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@300;400;500&family=Syne:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="css/main.css">
+</head>
+<body>
+<div id="root">
+  <nav class="nav" id="nav" style="display:none">
+    <div class="nav-logo">
+      <svg width="26" height="26" viewBox="0 0 28 28" fill="none"><rect width="28" height="28" rx="7" fill="rgba(77,159,255,.15)"/><path d="M14 5C9.03 5 5 9.03 5 14s4.03 9 9 9 9-4.03 9-9-4.03-9-9-9z" stroke="#7ec8ff" stroke-width="1.5" fill="none"/><path d="M10 14h8M14 10v8" stroke="#7ec8ff" stroke-width="2" stroke-linecap="round"/></svg>
+      <span class="nav-logo-t">TherapyVR</span>
+    </div>
+    <div class="nav-links" id="nav-links"></div>
+    <div class="nav-r">
+      <div class="qst"><div class="qdot" id="qdot"></div><span id="qtext">Quest inactiv</span></div>
+      <div class="qst"><div class="ai-dot" id="aiDot"></div><span id="aiTxt">AI inactiv</span></div>
+      <a href="https://horizon.meta.com/casting/" target="_blank" rel="noopener" class="qst" style="color:var(--ac2);text-decoration:none;gap:6px;transition:all .15s;border-color:rgba(77,159,255,.25)" onmouseover="this.style.borderColor='rgba(77,159,255,.5)';this.style.background='rgba(77,159,255,.08)'" onmouseout="this.style.borderColor='rgba(77,159,255,.25)';this.style.background='rgba(0,0,0,.2)'">
+  <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><polygon points="23 7 16 12 23 17 23 7"/><rect x="1" y="5" width="15" height="14" rx="2"/></svg>
+  Casting
+</a>
+      <button class="ai-toggle-btn" id="btn-ai-toggle" title="Reconectare Asistent AI" style="display:none">↺ Reconectare AI</button>
+      <!-- CHANGE 8: Headset selector -->
+      <div class="hsel-wrap" id="hsel-wrap">
+        <button class="hsel-btn" id="hsel-btn">
+          <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M3 18v-6a9 9 0 0 1 18 0v6"/><path d="M21 19a2 2 0 0 1-2 2h-1a2 2 0 0 1-2-2v-3a2 2 0 0 1 2-2h3z"/><path d="M3 19a2 2 0 0 0 2 2h1a2 2 0 0 0 2-2v-3a2 2 0 0 0-2-2H3z"/></svg>
+          <span id="hsel-label">Quest</span>
+          <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><polyline points="6 9 12 15 18 9"/></svg>
+        </button>
+        <div class="hsel-dd" id="hsel-dd" style="display:none">
+          <div class="hsel-hdr">Questuri înregistrate</div>
+          <div id="hsel-list"></div>
+          <div class="hsel-sep"></div>
+          <button class="hsel-add" id="hsel-add">+ Adaugă Quest nou</button>
+        </div>
+      </div>
+      <!-- CHANGE 5: Profile dropdown (Convai-style) -->
+      <div style="position:relative" id="profile-wrap">
+        <button class="acc-avatar" id="btn-acc" title="Cont"></button>
+        <div class="profile-dd" id="profile-dd" style="display:none">
+          <div class="pd-header">
+            <div class="pd-av2" id="pd-av"></div>
+            <div class="pd-name2" id="pd-name"></div>
+            <div class="pd-email2" id="pd-email"></div>
+          </div>
+          <div class="pd-sep"></div>
+          <button class="pd-item" id="pd-account">
+            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="8" r="4"/><path d="M4 20c0-4 3.6-7 8-7s8 3 8 7"/></svg>
+            Cont
+          </button>
+          <div class="pd-sep"></div>
+          <button class="pd-item pd-logout" id="pd-logout">
+            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"/><polyline points="16 17 21 12 16 7"/><line x1="21" y1="12" x2="9" y2="12"/></svg>
+            Deconectare
+          </button>
+        </div>
+      </div>
+    </div>
+  </nav>
+  <div id="page"></div>
+  <div id="dash-slot" style="display:none;padding-top:var(--nh);min-height:100vh"></div>
+</div>
+<div id="modal-root"></div>
+<div id="toast-root"></div>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+<script type="module" src="js/app.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.min.js"></script>
+</body>
+</html>
