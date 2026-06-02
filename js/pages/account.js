@@ -143,7 +143,6 @@ export class AccountPage extends Page{
             <div style="padding:11px 14px;background:var(--sf2);border:1px solid var(--bd);border-radius:var(--r);margin-bottom:12px;font-size:13px;color:var(--txd)">
               Autentificat ca <strong style="color:var(--tx);font-family:var(--mono)">${U.esc(email)}</strong>
             </div>
-            <p style="font-size:12px;color:var(--txm);margin-bottom:14px">La deconectare, un alt terapeut se poate autentifica din pagina de login.</p>
             <button class="btn btn-d" id="logout-acc" style="gap:8px">
               <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"/><polyline points="16 17 21 12 16 7"/><line x1="21" y1="12" x2="9" y2="12"/></svg>
               Deconectare
