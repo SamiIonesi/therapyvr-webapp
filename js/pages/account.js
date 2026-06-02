@@ -14,7 +14,7 @@ export class AccountPage extends Page{
     const initials=(name.split(' ').map(w=>w[0]||'').join('').substring(0,2)||email.substring(0,2)).toUpperCase();
     const isGoogle=u?.providerData?.some(p=>p.providerId==='google.com');
     return`<div class="wrap">
-      <div class="ph"><div class="pt">Cont</div><div class="ps">Profilul terapeutului — date vizibile doar în cadrul sistemului</div></div>
+      <div class="ph"><div class="pt">Cont</div><div class="ps">Profilul terapeutului</div></div>
 
         <!-- Profile header -->
         <div class="card" style="margin-bottom:16px">
@@ -48,7 +48,6 @@ export class AccountPage extends Page{
               <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"/><path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"/></svg>
               Date personale
             </div>
-            <span style="font-size:11px;color:var(--txm)">Salvate în Firestore</span>
           </div>
           <div class="cb">
             <div class="fg" style="margin-bottom:14px">
