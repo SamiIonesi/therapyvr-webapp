@@ -483,8 +483,8 @@ export class DashboardPage extends Page{
       if(!m||m.cognitiveScore==null)return;
       const score=m.cognitiveScore,currentLevel=this._lvl||1;
       let newLevel=currentLevel;
-      if(score>0.8)newLevel=Math.min(currentLevel+1,3);
-      else if(score<0.6)newLevel=Math.max(currentLevel-1,1);
+      if(score>0.75)newLevel=Math.min(currentLevel+1,3);
+      else if(score<0.55)newLevel=Math.max(currentLevel-1,1);
       await this.app.patients.update(this._pat.id,{recommendedLevel:newLevel});
       if(newLevel!==currentLevel){this._log(`📋 Nivel recomandat actualizat: ${currentLevel} → ${newLevel} (scor: ${(score*100).toFixed(0)})`);UI.toast(`Nivel recomandat actualizat: ${currentLevel} → ${newLevel}`,'info');}
       else{this._log(`📋 Nivel recomandat neschimbat: ${currentLevel} (scor: ${(score*100).toFixed(0)})`);}
