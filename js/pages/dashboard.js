@@ -368,7 +368,7 @@ export class DashboardPage extends Page{
     this._updStatus(this._active?(this._gamePaused?'paused':'active'):'idle');
     this._updQuestNav(this._questReady,this._hmdDown);
     const ad=document.getElementById('aiDot'),at=document.getElementById('aiTxt');
-    if(ad&&at){ad.className='ai-dot'+(this._aiConnected?' on':'');at.textContent=this._aiConnected?'Asistent AI activ':'Asistent AI inactiv';}
+    if(ad&&at){ad.className='ai-dot'+(this._aiConnected?' on':'');at.textContent=this._aiConnected?'Asistent virtual activ':'Asistent virtual inactiv';}
     const aiBtn=document.getElementById('btn-ai-toggle');
     if(aiBtn)aiBtn.style.display=(this._questReady&&!this._aiConnected)?'block':'none';
     this._updBtns();
