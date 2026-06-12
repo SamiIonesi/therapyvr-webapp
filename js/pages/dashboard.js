@@ -105,9 +105,9 @@ export class DashboardPage extends Page{
 
             <!-- Control buttons -->
             <div class="ctrl-grid">
-              <button class="cbtn c-cal" id="bcal" disabled title="Calibrare poziție pacient">
+              <button class="cbtn c-cal" id="bcal" disabled title="Aliniere poziție pacient">
                 <span class="ci">${ICONS.cal}</span>
-                <span class="cl">CALIBRARE</span>
+                <span class="cl">ALINIERE</span>
               </button>
               <button class="cbtn c-sta" id="bsta" disabled title="Pornire sesiune">
                 <span class="ci">${ICONS.play}</span>
@@ -368,7 +368,7 @@ export class DashboardPage extends Page{
     this._updStatus(this._active?(this._gamePaused?'paused':'active'):'idle');
     this._updQuestNav(this._questReady,this._hmdDown);
     const ad=document.getElementById('aiDot'),at=document.getElementById('aiTxt');
-    if(ad&&at){ad.className='ai-dot'+(this._aiConnected?' on':'');at.textContent=this._aiConnected?'Asistent AI activ':'Asistent AI inactiv';}
+    if(ad&&at){ad.className='ai-dot'+(this._aiConnected?' on':'');at.textContent=this._aiConnected?'Asistent virtual activ':'Asistent virtual inactiv';}
     const aiBtn=document.getElementById('btn-ai-toggle');
     if(aiBtn)aiBtn.style.display=(this._questReady&&!this._aiConnected)?'block':'none';
     this._updBtns();
@@ -410,10 +410,10 @@ export class DashboardPage extends Page{
   }
 
   _onCal(){
-    if(this._active){UI.modal('Calibrare în sesiune activă','<strong>Atenție:</strong> Sesiunea este activă. Ești sigur că vrei să recalibrezi acum?','Da, calibrează',()=>this._sendCal(),'btn-p');}
+    if(this._active){UI.modal('Aliniere în sesiune activă','<strong>Atenție:</strong> Sesiunea este activă. Ești sigur că vrei să aliniezi acum?','Da, aliniază',()=>this._sendCal(),'btn-p');}
     else this._sendCal();
   }
-  async _sendCal(){await this.app.sess.cmd({command:'calibrate',status:'calibrating',t:Date.now()});this._log('🎯 Calibrare trimisă');UI.toast('Calibrare trimisă.','info');}
+  async _sendCal(){await this.app.sess.cmd({command:'calibrate',status:'calibrating',t:Date.now()});this._log('🎯 Aliniere trimisă');UI.toast('Aliniere trimisă.','info');}
 
   _saveSession(){
     if(!this._active)return;
@@ -717,7 +717,7 @@ if(this._questReady&&data.questOnline===true&&!hmdNow&&!this._hmdDown){
       const aiOn=data.aiConnected===true&&data.questOnline===true;
       this._aiConnected=aiOn;this._updBtns();
       const ad=document.getElementById('aiDot'),at=document.getElementById('aiTxt');
-      if(ad&&at){ad.className='ai-dot'+(aiOn?' on':'');at.textContent=aiOn?'Asistent AI activ':'Asistent AI inactiv';}
+      if(ad&&at){ad.className='ai-dot'+(aiOn?' on':'');at.textContent=aiOn?'Asistent virtual activ':'Asistent virtual inactiv';}
       const aiBtn=document.getElementById('btn-ai-toggle');
       if(aiBtn){const qOn=data.questOnline===true;aiBtn.style.display=(qOn&&!aiOn)?'block':'none';}
     }));
@@ -725,7 +725,7 @@ if(this._questReady&&data.questOnline===true&&!hmdNow&&!this._hmdDown){
     if(this._sid&&this._active)this._listenMetrics();
     // Refresh all UI
     this._refreshUI();
-    this._log('🔄 Quest: '+newCode);
+    this._log('🔄 Cască: '+newCode);
   }
 
   _log(msg){
