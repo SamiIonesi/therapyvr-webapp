@@ -28,7 +28,7 @@ export class DashboardPage extends Page{
           <div class="pt">Dashboard Sesiune</div>
           <span id="active-quest-badge" style="display:none;padding:4px 12px;border-radius:20px;border:1px solid rgba(77,159,255,.4);background:var(--acg);color:var(--ac2);font-size:12px;font-weight:700;font-family:var(--mono)"></span>
         </div>
-        <div class="ps">Controlul sesiunii de terapie în timp real</div>
+        <div class="ps">Controlul sesiunii de terapie</div>
       </div>
       <div style="display:flex;align-items:center;gap:8px"><div class="sdot" id="sdot"></div><span id="slabel" style="font-size:13px;font-weight:600;color:var(--txd)">Sesiune inactivă</span></div>
     </div>
@@ -282,10 +282,10 @@ export class DashboardPage extends Page{
       this._aiConnected=aiOn;
       this._updBtns();
       const ad=document.getElementById('aiDot'),at=document.getElementById('aiTxt');
-      if(ad&&at){ad.className='ai-dot'+(aiOn?' on':'');at.textContent=aiOn?'Asistent AI activ':'Asistent AI inactiv';}
+      if(ad&&at){ad.className='ai-dot'+(aiOn?' on':'');at.textContent=aiOn?'Asistent virtual activ':'Asistent virtual inactiv';}
       const aiBtn=document.getElementById('btn-ai-toggle');
       if(aiBtn){
-        // Apare DOAR dacă Quest e activ dar AI s-a deconectat
+        // Apare DOAR dacă Quest e activ dar asistentul virtual s-a deconectat
         const questOn=data.questOnline===true;
         aiBtn.style.display=(questOn&&!aiOn)?'block':'none';
       }
@@ -640,9 +640,9 @@ if(_mwKey){const mwEl=document.getElementById('mw');if(mwEl)wrapShapeEl(mwEl,()=
   _updQuestNav(online,hmdDown){
     const d=document.getElementById('qdot'),t=document.getElementById('qtext');
     if(!d||!t)return;
-    if(!online){d.className='qdot';t.textContent='Quest inactiv';return;}
+    if(!online){d.className='qdot';t.textContent='Cască inactivă';return;}
     if(hmdDown){d.className='qdot paused';t.textContent='Casca dată jos';return;}
-    d.className='qdot on';t.textContent='Quest activ';
+    d.className='qdot on';t.textContent='Cască activă';
   }
   _updQuestStatus(cmd,st,online){this._updQuestNav(online,this._hmdDown);}
   onHeadsetChanged(){

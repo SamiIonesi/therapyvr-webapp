@@ -30,17 +30,17 @@ export class PatientFormPage extends Page{
         <div class="ch"><div class="ct">Persoană de contact (aparținător)</div></div>
         <div class="cb">
           <div class="fg">
-            <div class="field"><label>Nume aparținător</label><input type="text" id="fcn" placeholder="Maria Popescu (fiică)" value="${U.esc(p.contactName||'')}"></div>
-            <div class="field"><label>Telefon aparținător</label><input type="tel" id="fcp" placeholder="07xx xxx xxx" value="${U.esc(p.contactPhone||'')}"></div>
+            <div class="field"><label>Nume</label><input type="text" id="fcn" placeholder="Maria Popescu (fiică)" value="${U.esc(p.contactName||'')}"></div>
+            <div class="field"><label>Telefon</label><input type="tel" id="fcp" placeholder="07xx xxx xxx" value="${U.esc(p.contactPhone||'')}"></div>
           </div>
         </div>
         <div class="ch"><div class="ct">Informații medicale</div></div>
         <div class="cb">
           <div class="fg">
             <div class="field"><label>Diagnostic principal *</label><select id="fdiag"><option value="">Selectează...</option>${diags.map(d=>`<option ${p.diagnosis===d?'selected':''}>${d}</option>`).join('')}</select></div>
-            <div class="field"><label>Mâna dominantă (pre-boală) *</label><select id="fdh"><option value="">Necunoscută</option><option value="right" ${p.dominantHand==='right'?'selected':''}>Dreaptă</option><option value="left" ${p.dominantHand==='left'?'selected':''}>Stângă</option></select></div>
+            <div class="field"><label>Mâna dominantă *</label><select id="fdh"><option value="">Necunoscută</option><option value="right" ${p.dominantHand==='right'?'selected':''}>Dreaptă</option><option value="left" ${p.dominantHand==='left'?'selected':''}>Stângă</option></select></div>
           </div>
-          <div class="field"><label>Detalii diagnostic / anamneză</label><textarea id="fdd" placeholder="Descriere detaliată...">${U.esc(p.diagnosisDetails||'')}</textarea></div>
+          <div class="field"><label>Detalii diagnostic</label><textarea id="fdd" placeholder="Descriere detaliată...">${U.esc(p.diagnosisDetails||'')}</textarea></div>
           <div class="field"><label>Observații terapeut</label><textarea id="fn" placeholder="Observații comportamentale, recomandări...">${U.esc(p.notes||'')}</textarea></div>
           <div class="field" style="max-width:200px"><label>Nivel recomandat</label><select id="frl">${[1,2,3].map(l=>`<option value="${l}" ${p.recommendedLevel==l?'selected':''}>Nivel ${l}</option>`).join('')}</select></div>
         </div>
