@@ -28,7 +28,7 @@ export class DashboardPage extends Page{
           <div class="pt">Dashboard Sesiune</div>
           <span id="active-quest-badge" style="display:none;padding:4px 12px;border-radius:20px;border:1px solid rgba(77,159,255,.4);background:var(--acg);color:var(--ac2);font-size:12px;font-weight:700;font-family:var(--mono)"></span>
         </div>
-        <div class="ps">Controlul sesiunii de terapie în timp real</div>
+        <div class="ps">Controlul sesiunii de terapie</div>
       </div>
       <div style="display:flex;align-items:center;gap:8px"><div class="sdot" id="sdot"></div><span id="slabel" style="font-size:13px;font-weight:600;color:var(--txd)">Sesiune inactivă</span></div>
     </div>
@@ -107,7 +107,7 @@ export class DashboardPage extends Page{
             <div class="ctrl-grid">
               <button class="cbtn c-cal" id="bcal" disabled title="Calibrare poziție pacient">
                 <span class="ci">${ICONS.cal}</span>
-                <span class="cl">CALIBRARE</span>
+                <span class="cl">ALINIERE</span>
               </button>
               <button class="cbtn c-sta" id="bsta" disabled title="Pornire sesiune">
                 <span class="ci">${ICONS.play}</span>
@@ -247,7 +247,7 @@ export class DashboardPage extends Page{
       if(!data)return;
       const wasReady=this._questReady;
       this._questReady=data.questOnline===true;
-      if(!wasReady&&this._questReady){this._updQuestNav(true,false);this._log('🟢 Quest conectat');}
+      if(!wasReady&&this._questReady){this._updQuestNav(true,false);this._log('🟢 Cască conectată');}
       this._updBtns();
       if(wasReady&&!this._questReady){
         const wasActive=this._active;
@@ -256,7 +256,7 @@ export class DashboardPage extends Page{
         const tm=document.getElementById('tmr');if(tm)tm.classList.remove('paused');
         this._updQuestNav(false,false);
         this._updStatus(wasActive?'ended':'idle');
-        this._log('🔴 Quest deconectat');
+        this._log('🔴 Cască deconectată');
         UI.toast('Quest deconectat.','error');
         setTimeout(()=>this._resetUI(),1000);
       }
@@ -282,7 +282,7 @@ export class DashboardPage extends Page{
       this._aiConnected=aiOn;
       this._updBtns();
       const ad=document.getElementById('aiDot'),at=document.getElementById('aiTxt');
-      if(ad&&at){ad.className='ai-dot'+(aiOn?' on':'');at.textContent=aiOn?'Asistent AI activ':'Asistent AI inactiv';}
+      if(ad&&at){ad.className='ai-dot'+(aiOn?' on':'');at.textContent=aiOn?'Asistent virtual activ':'Asistent virtual inactiv';}
       const aiBtn=document.getElementById('btn-ai-toggle');
       if(aiBtn){
         // Apare DOAR dacă Quest e activ dar AI s-a deconectat
@@ -640,9 +640,9 @@ if(_mwKey){const mwEl=document.getElementById('mw');if(mwEl)wrapShapeEl(mwEl,()=
   _updQuestNav(online,hmdDown){
     const d=document.getElementById('qdot'),t=document.getElementById('qtext');
     if(!d||!t)return;
-    if(!online){d.className='qdot';t.textContent='Quest inactiv';return;}
+    if(!online){d.className='qdot';t.textContent='Cască inactivă';return;}
     if(hmdDown){d.className='qdot paused';t.textContent='Casca dată jos';return;}
-    d.className='qdot on';t.textContent='Quest activ';
+    d.className='qdot on';t.textContent='Cască activă';
   }
   _updQuestStatus(cmd,st,online){this._updQuestNav(online,this._hmdDown);}
   onHeadsetChanged(){
