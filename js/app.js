@@ -97,17 +97,17 @@ if(!photo && u.uid){
     if(!btn||!dd||!list)return;
     btn.addEventListener('click',e=>{e.stopPropagation();dd.style.display=dd.style.display==='none'?'block':'none';document.getElementById('profile-dd').style.display='none';});
     document.getElementById('hsel-add').addEventListener('click',()=>{
-      UI.modal('Adaugă cască',
-        '<div class="field"><label>Cod cască (unic, ex: Q001)</label><input id="hc" type="text" placeholder="Q001" autocomplete="off"></div><div class="field"><label>Nume afișat (opțional)</label><input id="hn" type="text" placeholder="Cască Andrei" autocomplete="off"></div>',
+      UI.modal('Adaugă Quest',
+        '<div class="field"><label>Cod Quest (unic, ex: Q001)</label><input id="hc" type="text" placeholder="Q001" autocomplete="off"></div><div class="field"><label>Nume afișat (opțional)</label><input id="hn" type="text" placeholder="Quest Andrei" autocomplete="off"></div>',
         'Adaugă',async(fd)=>{
           const code=(fd.hc||'').trim().toUpperCase();
           const name=(fd.hn||'').trim();
-          if(!code){UI.toast('Codul pentru cască este obligatoriu.','error');return;}
+          if(!code){UI.toast('Codul Quest este obligatoriu.','error');return;}
           if((this._questsList||[]).some(h=>(h.headsetCode||h.id)===code)){
             UI.toast('Codul "'+code+'" există deja.','error');return;
           }
           await this.headsets.add(code,name||code);
-          UI.toast('Cască adăugată: '+(name||code),'success');
+          UI.toast('Quest adăugat: '+(name||code),'success');
         },'btn-p');
       dd.style.display='none';
     });
@@ -126,7 +126,7 @@ if(!photo && u.uid){
         				}
     				}
 	}
-      if(!hs.length){list.innerHTML='<div style="padding:12px 14px;font-size:12px;color:var(--txm)">Nici o cască înregistrată.</div>';return;}
+      if(!hs.length){list.innerHTML='<div style="padding:12px 14px;font-size:12px;color:var(--txm)">Niciun Quest înregistrat.</div>';return;}
       const cur=this.state.headset?.id||null;
       list.innerHTML=hs.map(h=>`<div class="hsel-item ${h.id===cur?'act':''}" data-id="${h.id}" data-code="${h.headsetCode||h.id}" data-name="${h.headsetName||h.id}" style="justify-content:space-between">
         <div style="display:flex;align-items:center;gap:10px">
@@ -135,7 +135,7 @@ if(!photo && u.uid){
         </div>
         <button onclick="event.stopPropagation();window._removeHeadset('${h.id}')" style="background:transparent;border:none;color:var(--red);cursor:pointer;padding:4px;font-size:16px;line-height:1" title="Șterge">×</button>
       </div>`).join('');
-      window._removeHeadset=async(id)=>{if(this.state.headset?.id===id){this.state.headset=null;this._applyHeadset(null);}await this.headsets.remove(id);UI.toast('Cască ștersă.','info');};
+      window._removeHeadset=async(id)=>{if(this.state.headset?.id===id){this.state.headset=null;this._applyHeadset(null);}await this.headsets.remove(id);UI.toast('Quest șters.','info');};
       list.querySelectorAll('.hsel-item').forEach(el=>{
         el.addEventListener('click',()=>{
           const h=hs.find(x=>x.id===el.dataset.id);if(!h)return;
@@ -173,11 +173,11 @@ if(!photo && u.uid){
   _applyHeadset(h){
     const code=h?.headsetCode||h?.id||null;
     this.sess.setHeadset(code);
-    const lbl=document.getElementById('hsel-label');if(lbl)lbl.textContent=h?(h.headsetName||h.id):'Cască';
+    const lbl=document.getElementById('hsel-label');if(lbl)lbl.textContent=h?(h.headsetName||h.id):'Quest';
     const btn=document.getElementById('hsel-btn');if(btn)btn.className='hsel-btn'+(h?' sel':'');
     if(this._dp)this._dp.onHeadsetChanged?.();
-    if(h)UI.toast('Cască selectată: '+(h.headsetName||h.id),'success');
-    else UI.toast('Cască deselectată.','info');
+    if(h)UI.toast('Quest selectat: '+(h.headsetName||h.id),'success');
+    else UI.toast('Quest deselectat.','info');
   }
   _go(pg,p={}){
     document.querySelectorAll('.nl').forEach(l=>l.classList.toggle('active',

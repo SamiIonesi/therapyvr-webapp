@@ -28,7 +28,7 @@ export class DashboardPage extends Page{
           <div class="pt">Dashboard Sesiune</div>
           <span id="active-quest-badge" style="display:none;padding:4px 12px;border-radius:20px;border:1px solid rgba(77,159,255,.4);background:var(--acg);color:var(--ac2);font-size:12px;font-weight:700;font-family:var(--mono)"></span>
         </div>
-        <div class="ps">Controlul sesiunii de terapie</div>
+        <div class="ps">Controlul sesiunii de terapie în timp real</div>
       </div>
       <div style="display:flex;align-items:center;gap:8px"><div class="sdot" id="sdot"></div><span id="slabel" style="font-size:13px;font-weight:600;color:var(--txd)">Sesiune inactivă</span></div>
     </div>
@@ -105,9 +105,9 @@ export class DashboardPage extends Page{
 
             <!-- Control buttons -->
             <div class="ctrl-grid">
-              <button class="cbtn c-cal" id="bcal" disabled title="Aliniere poziție pacient">
+              <button class="cbtn c-cal" id="bcal" disabled title="Calibrare poziție pacient">
                 <span class="ci">${ICONS.cal}</span>
-                <span class="cl">ALINIERE</span>
+                <span class="cl">CALIBRARE</span>
               </button>
               <button class="cbtn c-sta" id="bsta" disabled title="Pornire sesiune">
                 <span class="ci">${ICONS.play}</span>
@@ -282,10 +282,10 @@ export class DashboardPage extends Page{
       this._aiConnected=aiOn;
       this._updBtns();
       const ad=document.getElementById('aiDot'),at=document.getElementById('aiTxt');
-      if(ad&&at){ad.className='ai-dot'+(aiOn?' on':'');at.textContent=aiOn?'Asistent virtual activ':'Asistent virtual inactiv';}
+      if(ad&&at){ad.className='ai-dot'+(aiOn?' on':'');at.textContent=aiOn?'Asistent AI activ':'Asistent AI inactiv';}
       const aiBtn=document.getElementById('btn-ai-toggle');
       if(aiBtn){
-        // Apare DOAR dacă Quest e activ dar asistentul virtual s-a deconectat
+        // Apare DOAR dacă Quest e activ dar AI s-a deconectat
         const questOn=data.questOnline===true;
         aiBtn.style.display=(questOn&&!aiOn)?'block':'none';
       }
@@ -368,7 +368,7 @@ export class DashboardPage extends Page{
     this._updStatus(this._active?(this._gamePaused?'paused':'active'):'idle');
     this._updQuestNav(this._questReady,this._hmdDown);
     const ad=document.getElementById('aiDot'),at=document.getElementById('aiTxt');
-    if(ad&&at){ad.className='ai-dot'+(this._aiConnected?' on':'');at.textContent=this._aiConnected?'Asistent virtual activ':'Asistent virtual inactiv';}
+    if(ad&&at){ad.className='ai-dot'+(this._aiConnected?' on':'');at.textContent=this._aiConnected?'Asistent AI activ':'Asistent AI inactiv';}
     const aiBtn=document.getElementById('btn-ai-toggle');
     if(aiBtn)aiBtn.style.display=(this._questReady&&!this._aiConnected)?'block':'none';
     this._updBtns();
@@ -410,10 +410,10 @@ export class DashboardPage extends Page{
   }
 
   _onCal(){
-    if(this._active){UI.modal('Aliniere în sesiune activă','<strong>Atenție:</strong> Sesiunea este activă. Ești sigur că vrei să aliniezi acum?','Da, aliniază',()=>this._sendCal(),'btn-p');}
+    if(this._active){UI.modal('Calibrare în sesiune activă','<strong>Atenție:</strong> Sesiunea este activă. Ești sigur că vrei să recalibrezi acum?','Da, calibrează',()=>this._sendCal(),'btn-p');}
     else this._sendCal();
   }
-  async _sendCal(){await this.app.sess.cmd({command:'calibrate',status:'calibrating',t:Date.now()});this._log('🎯 Aliniere trimisă');UI.toast('Aliniere trimisă.','info');}
+  async _sendCal(){await this.app.sess.cmd({command:'calibrate',status:'calibrating',t:Date.now()});this._log('🎯 Calibrare trimisă');UI.toast('Calibrare trimisă.','info');}
 
   _saveSession(){
     if(!this._active)return;
@@ -640,9 +640,9 @@ if(_mwKey){const mwEl=document.getElementById('mw');if(mwEl)wrapShapeEl(mwEl,()=
   _updQuestNav(online,hmdDown){
     const d=document.getElementById('qdot'),t=document.getElementById('qtext');
     if(!d||!t)return;
-    if(!online){d.className='qdot';t.textContent='Cască inactivă';return;}
+    if(!online){d.className='qdot';t.textContent='Quest inactiv';return;}
     if(hmdDown){d.className='qdot paused';t.textContent='Casca dată jos';return;}
-    d.className='qdot on';t.textContent='Cască activă';
+    d.className='qdot on';t.textContent='Quest activ';
   }
   _updQuestStatus(cmd,st,online){this._updQuestNav(online,this._hmdDown);}
   onHeadsetChanged(){
@@ -717,7 +717,7 @@ if(this._questReady&&data.questOnline===true&&!hmdNow&&!this._hmdDown){
       const aiOn=data.aiConnected===true&&data.questOnline===true;
       this._aiConnected=aiOn;this._updBtns();
       const ad=document.getElementById('aiDot'),at=document.getElementById('aiTxt');
-      if(ad&&at){ad.className='ai-dot'+(aiOn?' on':'');at.textContent=aiOn?'Asistent virtual activ':'Asistent virtual inactiv';}
+      if(ad&&at){ad.className='ai-dot'+(aiOn?' on':'');at.textContent=aiOn?'Asistent AI activ':'Asistent AI inactiv';}
       const aiBtn=document.getElementById('btn-ai-toggle');
       if(aiBtn){const qOn=data.questOnline===true;aiBtn.style.display=(qOn&&!aiOn)?'block':'none';}
     }));
@@ -725,7 +725,7 @@ if(this._questReady&&data.questOnline===true&&!hmdNow&&!this._hmdDown){
     if(this._sid&&this._active)this._listenMetrics();
     // Refresh all UI
     this._refreshUI();
-    this._log('🔄 Cască: '+newCode);
+    this._log('🔄 Quest: '+newCode);
   }
 
   _log(msg){
